@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">PruebaBolsiyo</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="View_Login">Logeo</string>
+    <string name="View_List_Image">Consulta de Imagenes</string>
+    <string name="Hint_Usuario">Ingrese su correo</string>
+    <string name="Hint_Contraseña">Ingrese su contraseña</string>
+    <string name="Text_Button_Logeo">INGRESO</string>
+    <string name="Text_Button_Registro">REGISTRO</string>
+    <string name="informacion_consulta">Ingrese la informacion de la imagen a buscar (Tamaño Max. 100 caracteres), recuerde de ser necesario tambien puede filtrar por categoria y ajustar el numero de resultados:</string>
+    <string name="Hint_Consulta">Ingrese el termino de busqueda:</string>
+    <string name="Text_Button_Buscar">BUSCAR</string>
+    <string name="Text_Tags">Tags:</string>
+    <string name="Text_Views">Vistas:</string>
+    <string name="Text_Likes">Me Gusta:</string>
+
+</resources>

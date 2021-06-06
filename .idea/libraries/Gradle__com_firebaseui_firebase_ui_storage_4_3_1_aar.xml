@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.firebaseui:firebase-ui-storage:4.3.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e826302b7cd8bdb96704eae3a9e64670/jetified-firebase-ui-storage-4.3.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ff2836eaf4423109ec0aaae9b0335d5/jetified-firebase-ui-storage-4.3.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/86f42d265dd720282546ef42120dd0f4/jetified-firebase-ui-storage-4.3.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/86f42d265dd720282546ef42120dd0f4/jetified-firebase-ui-storage-4.3.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/86f42d265dd720282546ef42120dd0f4/jetified-firebase-ui-storage-4.3.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebaseui/firebase-ui-storage/4.3.1/f733b3129913e727f0eb500f2bad085d128452c8/firebase-ui-storage-4.3.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebaseui/firebase-ui-storage/4.3.1/fe1dda4ed67dea2e819bae0e8828c220e8ebd2dc/firebase-ui-storage-4.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

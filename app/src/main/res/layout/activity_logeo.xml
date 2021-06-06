@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.agndesarrollos.pruebabolsiyo.Login">
+
+
+    <ScrollView
+        android:id="@+id/Login_ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondospop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Login_ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/Login_ScrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/Logo_ImageView"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@id/User_EditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".80"
+                app:srcCompat="@drawable/logo" />
+
+            <EditText
+                android:id="@+id/User_EditText"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/Hint_Usuario"
+                android:inputType="textPersonName"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/blanco_transparente"
+                android:textColorHint="@color/blanco_transparente"
+                android:textColorLink="@android:color/black"
+                android:textSize="24sp"
+                android:visibility="visible"
+                app:backgroundTint="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/Pass_EditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/Pass_EditText"
+                style="@style/textboxlogeo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="32dp"
+                android:ems="10"
+                android:hint="@string/Hint_Contraseña"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                android:shadowColor="@color/white"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textColorHighlight="@color/blanco_transparente"
+                android:textColorHint="@color/blanco_transparente"
+                android:textColorLink="@color/white"
+                android:textSize="24sp"
+                android:visibility="visible"
+                app:backgroundTint="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/Login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Space
+                android:id="@+id/space1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Registro_button"
+                app:layout_constraintWidth_percent=".10" />
+
+
+            <Button
+                android:id="@+id/Login_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btmenu"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/Text_Button_Logeo"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/space1"
+                app:layout_constraintWidth_percent=".35" />
+
+            <Button
+                android:id="@+id/Registro_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/btmenu"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/Text_Button_Registro"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/space2"
+                app:layout_constraintTop_toTopOf="@+id/Login_button"
+                app:layout_constraintWidth_percent=".35" />
+
+            <Space
+                android:id="@+id/space2"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Registro_button"
+                app:layout_constraintWidth_percent=".10" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

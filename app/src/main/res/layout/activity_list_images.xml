@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoitem1"
+    tools:context="com.agndesarrollos.pruebabolsiyo.ListImagesActivity">
+
+    <ImageView
+        android:id="@+id/BarraPrincipal_ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/fondoitem1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/CerrarSesion_imagebutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/BarraPrincipal_ImageView"
+        app:layout_constraintEnd_toEndOf="@+id/BarraPrincipal_ImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_logout" />
+
+    <TextView
+        android:id="@+id/NameView_TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/View_List_Image"
+        android:textAlignment="center"
+        android:textColor="@color/blanco_transparente"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/BarraPrincipal_ImageView"
+        app:layout_constraintEnd_toStartOf="@+id/CerrarSesion_imagebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/BarraPrincipal_ImageView" />
+
+    <TextView
+        android:id="@+id/informacion_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/informacion_consulta"
+        android:textColor="@color/blanco_transparente"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BarraPrincipal_ImageView" />
+
+    <EditText
+        android:id="@+id/Consulta_textView"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textoborde2"
+        android:gravity="center_vertical"
+        android:hint="@string/Hint_Consulta"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/informacion_textView" />
+
+    <Spinner
+        android:id="@+id/Category_spinner"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/fondospinner"
+        app:layout_constraintEnd_toStartOf="@+id/Results_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Consulta_textView" />
+
+    <Spinner
+        android:id="@+id/Results_spinner"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/fondospinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Category_spinner" />
+
+    <Button
+        android:id="@+id/Buscar_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/fondobuttonbuscar"
+        android:text="@string/Text_Button_Buscar"
+        android:textColor="@color/blanco_transparente"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Category_spinner"
+        app:layout_constraintWidth_percent=".50" />
+
+    <RelativeLayout
+        android:id="@+id/ListImages_RelativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#66FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Buscar_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

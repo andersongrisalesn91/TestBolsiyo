@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.apptakk.http_request:http-request:0.3.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b813a17e25b74dea0c182946f92e8f5/http-request-0.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b813a17e25b74dea0c182946f92e8f5/http-request-0.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b813a17e25b74dea0c182946f92e8f5/http-request-0.3.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.apptakk.http_request/http-request/0.3.0/5f2fd18590cb04940daa0c418441755c7ca899e0/http-request-0.3.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.apptakk.http_request/http-request/0.3.0/59e06bdef76d12cf2a611b717a6ce6064210f8f1/http-request-0.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
