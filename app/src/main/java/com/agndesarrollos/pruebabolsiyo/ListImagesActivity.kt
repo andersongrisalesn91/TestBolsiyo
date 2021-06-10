@@ -39,6 +39,12 @@ class ListImagesActivity : AppCompatActivity() {
     internal var ARLikes = mutableListOf<String>()
     lateinit var RelativeLAS: RelativeLayout
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_list_images)
+        instance = this
+    }
+
     internal inner class Imagesc(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgPrev: ImageView
         var idImage: TextView
@@ -91,30 +97,23 @@ class ListImagesActivity : AppCompatActivity() {
 
 
     private fun IrImage(position: Int) {
-        //Se Guarda la informacion seleccionada en SQLite para poder acceder a ella aun si salimos de la app
-        val fg = FuncionesGenerales(baseContext)
-        fg?.actparam("imgid", ARid[position])
-        fg?.actparam("imgurl", ARUrls[position])
-        fg?.actparam("imgtags", ARTags[position])
-        fg?.actparam("imgviews", ARViews[position])
-        fg?.actparam("imglikes", ARLikes[position])
-        //Se Ejecuta el intent a la pantalla de detalle
+
+        //Se Ejecuta el intent a la pantalla de detalle y se envia la informacion por medio de un extra
         val intentDetalle = Intent(this, DetailImageActivity::class.java)
+        intentDetalle.putExtra("imgid",ARid[position])
+        intentDetalle.putExtra("imgurl",ARUrls[position])
+        intentDetalle.putExtra("imgtags",ARTags[position])
+        intentDetalle.putExtra("imgviews",ARViews[position])
+        intentDetalle.putExtra("imglikes",ARLikes[position])
         startActivity(intentDetalle)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_images)
-        instance = this
+    override fun onBackPressed() {
+        CerrarSesion()
     }
 
     override fun onStart() {
         super.onStart()
-
-        //Se Actualiza el valor de la pantalla actual, para poder seguir accediendo a la pantalla actual aunque se borre el cache
-        var fg = FuncionesGenerales(baseContext)
-        fg.ultimaPantalla("MisImagenes")
 
         //Definicion relative Images y asignacion del recicler view
         val inflaterImg = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -245,20 +244,19 @@ class ListImagesActivity : AppCompatActivity() {
     }
 
     fun CerrarSesion() {
-        //Se envian los parametros para crear alerta personalizada, para cerrar la sesion del usuario
+
+        //Se envian los parametros para crear alerta personalizada, (cerrar la sesion del usuario)
         val mapPop = HashMap<String, String>()
-        mapPop["Titulo"] = "Cerrar Sesion"
-        mapPop["Mensaje"] = "Desea Cerrar Sesion"
-        mapPop["TextoBTNo"] = "Cancelar"
-        mapPop["TextoBTSi"] = "Confirmar"
-        mapPop["Clase"] = "MainActivity"
-        mapPop["Sesion"] = "1"
-        PopUps().popUpConfirmar(baseContext, getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater, mapPop)
+        mapPop.put("Titulo", "Cerrar Sesion")
+        mapPop.put("Mensaje", "Desea Cerrar Sesion:")
+        mapPop.put("TextoBTNo", "Cancelar")
+        mapPop.put("TextoBTSi", "Confirmar")
+        mapPop.put("Clase", "MainActivity")
+        val prefs = getSharedPreferences(getString(R.string.Prefs_File),Context.MODE_PRIVATE)
+        PopUps().popUpConfirmar(baseContext, getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater, mapPop,prefs)
     }
 
     companion object {
-
-        lateinit var instance: ListImagesActivity
-            internal set
+        var instance: ListImagesActivity? = null
     }
 }

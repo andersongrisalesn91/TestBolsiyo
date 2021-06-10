@@ -4,8 +4,7 @@ import android.Manifest
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.agndesarrollos.pruebabolsiyo.R
-import com.agndesarrollos.pruebabolsiyo.MainActivity
+
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager

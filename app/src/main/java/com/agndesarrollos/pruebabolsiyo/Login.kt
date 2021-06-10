@@ -3,6 +3,7 @@ package com.agndesarrollos.pruebabolsiyo
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -11,42 +12,31 @@ import androidx.appcompat.app.AppCompatActivity
 import com.agndesarrollos.pruebabolsiyo.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_logeo.*
+import java.lang.Exception
 
 
 class Login : AppCompatActivity() {
-    var context: Context? = null
-    var userTXT:String = ""
-    var passTXT:String = ""
+
+    var userTXT: String = ""
+    var passTXT: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logeo)
         instance = this
-        try {
-            val cons = ConsultaGeneral()
-            val queryUP = "SELECT va FROM PA WHERE pa=?"
-            val pant = cons.queryObjeto(baseContext, queryUP, arrayOf("ultP"))
-            if (pant != null) {
-                val ultima = pant[0][0]
-                Ir(ultima)
-            } else {
-                Toast.makeText(baseContext, "No se puede acceder a la base de datos", Toast.LENGTH_LONG).show()
-            }
-        } catch (c: Exception) {
-            Log.i("Error ocreate:", c.toString())
-        }
     }
 
     override fun onStart() {
         super.onStart()
         val ivlogox = findViewById<ImageView>(R.id.Logo_ImageView)
         ivlogox.isSelected = true
-
         Login_button.setOnClickListener() {
             login()
         }
         Registro_button.setOnClickListener() {
             registro()
         }
+        sesion()
     }
 
     private fun login() {
@@ -54,7 +44,8 @@ class Login : AppCompatActivity() {
         if (connex) {
             login_online()
         } else {
-            login_offline()
+            Toast.makeText(baseContext, "No hay conexion , intentelo nuevamente",
+                    Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -62,12 +53,7 @@ class Login : AppCompatActivity() {
         if (ValidarDatos()) {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(userTXT, StringEncryption.SHA1(passTXT)).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    val sqluser = "insert or ignore into users (email , encrypted_password,login_online)" +
-                            " values ('" + userTXT + "' , " +
-                            "'" + StringEncryption.SHA1(passTXT) + "' ,1);"
-                    val operaciones = OperacionesBDInterna(this)
-                    operaciones.queryNoData(sqluser)
-                    IngresoCompletado(1)
+                    IngresoCompletado()
                 } else {
                     Toast.makeText(baseContext, "Logeo Fallido, verifique los datos e intentelo nuevamente, si no esta registrado, registrese primero.",
                             Toast.LENGTH_LONG).show()
@@ -76,42 +62,17 @@ class Login : AppCompatActivity() {
         }
     }
 
-    fun login_offline() {
-        if (ValidarDatos()){
-            val cGeneral = ConsultaGeneral()
-            val query = "SELECT encrypted_password FROM users WHERE email='" + userTXT + "'"
-            val obj = cGeneral.queryObjeto2val(baseContext, query, null)
-            if (obj == null) {
-                User_EditText.setText("")
-                Pass_EditText.setText("")
-                Toast.makeText(this, "Usuario no encontrado, por favor registrese o verifique la informacion ingresada, si esta intentando realizar el logeo offline, recuerde que debe haber realizado login online al menos 1 vez", Toast.LENGTH_LONG).show()
-            } else {
-                if (obj[0][0] == StringEncryption.SHA1(passTXT)) {
-                    IngresoCompletado(2)
-                } else {
-                    Pass_EditText.setText("")
-                    Toast.makeText(this, "Contraseña incorrecta, intentelo nuevamente", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
     fun registro() {
-        if (ValidarDatos()){
+        if (ValidarDatos()) {
             val connex = VerificarConex.revisarconexion(baseContext)
             if (connex) {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(userTXT, StringEncryption.SHA1(passTXT)).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val sqluser = "insert or ignore into users (email , encrypted_password,login_online)" +
-                                " values ('" + userTXT + "' , " +
-                                "'" + StringEncryption.SHA1(passTXT) + "' ,1);"
-                        val operaciones = OperacionesBDInterna(this)
-                        operaciones.queryNoData(sqluser)
-                        IngresoCompletado(1)
+                        IngresoCompletado()
                     } else {
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(userTXT, StringEncryption.SHA1(passTXT)).addOnCompleteListener() {
                             if (it.isSuccessful) {
-                                IngresoCompletado(1)
+                                IngresoCompletado()
                             } else {
                                 Toast.makeText(baseContext, "Registro Fallido, intentelo nuevamente.",
                                         Toast.LENGTH_SHORT).show()
@@ -126,7 +87,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    fun ValidarDatos():Boolean{
+    fun ValidarDatos(): Boolean {
         var fg = FuncionesGenerales(this)
         userTXT = User_EditText.text.toString().trim()
         passTXT = Pass_EditText.text.toString().trim()
@@ -143,43 +104,34 @@ class Login : AppCompatActivity() {
         return true
     }
 
-    fun IngresoCompletado(tipologeo: Int) {
-        val fg = FuncionesGenerales(baseContext)
-        val operaciones = OperacionesBDInterna(this)
-        fg.ultimaPantalla("Asteroides")
-        fg.actparam("userid", fg.getQ1("select id from users where email='" + userTXT + "';"))
-        fg.actparam("user", userTXT)
-        fg.actparam("pass", StringEncryption.SHA1(passTXT))
-        fg.actparam("login_online", tipologeo.toString())
-        fg.actparam("sesion", "1")
-        operaciones.queryNoData("UPDATE users SET login_online=" + tipologeo.toString() + " WHERE email='" + userTXT + "'")
+    fun IngresoCompletado() {
+        val prefs = getSharedPreferences(getString(R.string.Prefs_File),Context.MODE_PRIVATE).edit()
+        prefs.putString("email",userTXT)
+        prefs.putString("passsha1",StringEncryption.SHA1(passTXT))
+        prefs.apply()
         Toast.makeText(this, "Bienvenido:" + userTXT, Toast.LENGTH_SHORT).show()
+        irListImage()
+    }
+
+    fun sesion(){
+        try{
+            val prefs = getSharedPreferences(getString(R.string.Prefs_File),Context.MODE_PRIVATE)
+            val email = prefs.getString("email",null)
+            val pass = prefs.getString("passsha1",null)
+            if (email != null && pass != null){
+                irListImage()
+            }
+        }catch (e:Exception){
+            Log.d("Error:","Error de sesion:"+e.message)
+        }
+
+    }
+
+    fun irListImage(){
         val intlogeo = Intent(this, ListImagesActivity::class.java)
         intlogeo.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intlogeo, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         instance?.finishAfterTransition()
-    }
-
-    fun Ir(pantalla: String?) {
-        val p: Intent
-        when (pantalla) {
-            "Login" -> {
-                try {
-                    FirebaseAuth.getInstance().signOut()
-                } catch (e: java.lang.Exception) {
-                    Log.d("Error:", e.message.toString())
-                }
-                return
-            }
-            "MisImagenes" -> {
-                p = Intent(this, ListImagesActivity::class.java)
-                startActivity(p)
-            }
-            "DetalleImagen" -> {
-                p = Intent(this, ListImagesActivity::class.java)
-                startActivity(p)
-            }
-        }
     }
 
     companion object {

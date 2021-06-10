@@ -13,5 +13,6 @@
     <string name="Text_Tags">Tags:</string>
     <string name="Text_Views">Vistas:</string>
     <string name="Text_Likes">Me Gusta:</string>
+    <string name="Prefs_File">com.agndesarrollos.pruebabolsiyo.PREFERENCE_FILE_KEY</string>
 
 </resources>
